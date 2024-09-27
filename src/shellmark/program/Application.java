@@ -476,6 +476,7 @@ public class Application extends shellmark.program.Object {
 	    * @return an iterator of <code>shellmark.program.Class</code> objects
 	    * containing each class in this application
 	    */
+	   //重点检查！！！
 	 public java.util.Iterator classes() {
 		 return shellmark.util.Misc.instanceFilter(
                  members(), shellmark.program.Class.class);

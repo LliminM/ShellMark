@@ -51,7 +51,7 @@ public abstract class GeneralWatermarker extends shellmark.Algorithm
      *  @return the Help page URL
      */
     public static java.lang.String getHelpURL(){
-	return "sandmark/watermark/doc/watermarking.html";
+	return "shellmark/watermark/doc/watermarking.html";
     }
     
     

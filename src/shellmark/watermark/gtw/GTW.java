@@ -74,6 +74,7 @@ public class GTW extends shellmark.watermark.StaticWatermarker {
 	      return "{ecarter,ash,gmt}@cs.arizona.edu";
 	   }
 	//这是主要部分！
+	//从ShellMarkCLI的embed中来
 	   public void embed(shellmark.watermark.StaticEmbedParameters params)
 	      throws shellmark.watermark.WatermarkingException {
 
@@ -141,7 +142,7 @@ public class GTW extends shellmark.watermark.StaticWatermarker {
 	      //生成一个随机数生成器 rnd，并将其种子设置为上面生成的 key 的长整数值
 	      java.util.Random rnd = shellmark.util.Random.getRandom();
 	      rnd.setSeed(key.longValue());
-	      //遍历程序中的类和方法
+	      //遍历程序中的类和方法  重点检查的部分！！！
 	      for(java.util.Iterator classIt = params.app.classes() ; classIt.hasNext() ; ) {
 	         shellmark.program.Class clazz = (shellmark.program.Class)classIt.next();
 	            
@@ -150,7 +151,7 @@ public class GTW extends shellmark.watermark.StaticWatermarker {
 	            if(method.getInstructionList() == null || 
 	               method.getInstructionList().getLength() == 0)
 	               continue;
-	            programMethodCFGs.add(method.getCFG());
+	            programMethodCFGs.add(method.getCFG());//出错！！！
 
 	            if (!useCRT){
 	               methodMarkValue.put(method,new Integer(0));

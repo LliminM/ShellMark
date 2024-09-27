@@ -43,6 +43,7 @@ public abstract class Class extends JarElement  {
 	    * Constructs a shellmark Class from a BCEL JavaClass
 	    * and adds it to an application.
 	    */
+	   //检查这里
 	   /*package*/ Class(shellmark.program.Application parent,
 	         org.apache.bcel.classfile.JavaClass c,shellmark.program.Object orig) {
 

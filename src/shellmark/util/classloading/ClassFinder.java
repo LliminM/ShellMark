@@ -5,8 +5,7 @@ package shellmark.util.classloading;
  * The class types that can be requested through the methods of this class are
  * defined in shellmark.util.classloading.IClassFinder
  * @see shellmark.util.classloading.IClassFinder
- * @author Andrew Huntwork
- * @version 1.0
+ * @author LiMin
  */
 
 public class ClassFinder {
@@ -53,7 +52,9 @@ public class ClassFinder {
 		sClassShortNames.put(shortName,className);
 	    }
     }
-    /**
+
+
+	/**
      * Get all the classes that sListGen knows about it that derive from
      * the class indicated by 'ancestor'
      * @param ancestor one of the constants in IClassFinder

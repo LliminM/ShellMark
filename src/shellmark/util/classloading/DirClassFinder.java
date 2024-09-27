@@ -55,8 +55,8 @@ implements shellmark.util.classloading.IClassFinder {
             sAncestorsByNumber = new Class[CLASS_COUNT];
             for(int i = 0 ; i < CLASS_COUNT ; i++)
                 sAncestorsByNumber[i] = loader.loadClass(CLASS_NAMES[i]);
-            java.io.File dir = new java.io.File
-                (System.getProperty("SMARK_ROOT") + "/shellmark/");
+            //java.io.File dir = new java.io.File(System.getProperty("SMARK_ROOT") + "/shellmark/");
+            java.io.File dir = new java.io.File("D:/ShellMarkDevelop/ShellMark");
             findFiles(dir,sAncestorsByNumber,sClassesByAncestor,loader);
         } catch(Throwable t) {
             if(ClassFinder.debug)

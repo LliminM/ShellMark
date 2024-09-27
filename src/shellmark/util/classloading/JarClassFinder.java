@@ -23,7 +23,9 @@ class JarClassFinder
 	for(int i = 0 ; i < CLASS_COUNT ; i++)
 	    sClassesByAncestor[i] = new java.util.ArrayList();
 	try {
-	    sJF = new java.util.jar.JarFile(System.getProperty("SMARK_PATH"));
+		//System.setProperty("SMARK_PATH", "D:/ShellMarkDevelop/ShellMark/classes/artifacts/ShellMark_jar/ShellMark.jar");
+	    //sJF = new java.util.jar.JarFile(System.getProperty("SMARK_PATH"));
+		sJF = new java.util.jar.JarFile("D:/ShellMarkDevelop/ShellMark/classes/artifacts/ShellMark_jar/ShellMark.jar");
 	    sAncestorsByNumber = new Class[CLASS_COUNT];
 	    for(int i = 0 ; i < CLASS_COUNT ; i++)
 		sAncestorsByNumber[i] = Class.forName(CLASS_NAMES[i]);

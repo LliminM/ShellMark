@@ -5,7 +5,6 @@ package shellmark.util.classloading;
  * shellmark.util.classloading.ClassFinder as sources of class names
  @see shellmark.util.classloading.ClassFinder
  @author LiMin
- @version 1.0
 */
 
 public interface IClassFinder {
@@ -61,7 +60,7 @@ public interface IClassFinder {
     "shellmark.birthmark.GeneralBirthmark",
     "shellmark.birthmark.StaticClassBirthmark",
     "shellmark.birthmark.DynamicBirthmark",
-    "shellmark.wizard.quickprotect.QuickProtect"
+    //"shellmark.wizard.quickprotect.QuickProtect"
     };
     String CLASS_IDS[] = new String[] {
     "ALGORITHM",
@@ -87,7 +86,7 @@ public interface IClassFinder {
     "CLASS_OPTIMIZER",
     "GEN_BIRTHMARK",
     "STAT_BIRTHMARK",
-    "DYN_BIRTHMARK",
+    "GTW",
     "QUICK_PROTECT",
     };
     /**

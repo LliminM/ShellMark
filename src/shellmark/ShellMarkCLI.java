@@ -22,7 +22,9 @@ public class ShellMarkCLI {
 	};
 	
 	public static void main(String[] args) {
-	   shellmark.util.Options opts =
+		//System.setSecurityManager(new SecurityManager());
+		//System.setProperty("SMARK_PATH", "D:/ShellMarkDevelop/ShellMark/classes/artifacts/ShellMark_jar/ShellMark.jar");
+		shellmark.util.Options opts =
 			   new shellmark.util.Options(optSpec,"ShellMarkCLI",args);
 	   
 	   String options = opts.getWhich();
@@ -115,7 +117,8 @@ public class ShellMarkCLI {
     
         String key = opts.getValue('k');
         cp.setValue("Key",key);
-    
+
+		//这里可能是正确的！
         shellmark.watermark.StaticEmbedParameters params = 
             shellmark.watermark.StaticWatermarker.getEmbedParams(app);
     
@@ -206,8 +209,7 @@ public class ShellMarkCLI {
 	}
 	
 	private static shellmark.Algorithm getAlg(String algname) {
-		String className = 
-		        shellmark.util.classloading.ClassFinder.getClassByShortname(algname);
+		String className = shellmark.util.classloading.ClassFinder.getClassByShortname(algname);
 		     if(className == null)
 		        return null;
 		     try {

@@ -1,0 +1,1 @@
+java -cp bin shellmark.ShellMarkCLI -E -i in.jar -o in_wm.jar -w "8888" -A "gtw"
