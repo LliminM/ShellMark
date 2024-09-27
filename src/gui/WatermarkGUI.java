@@ -94,7 +94,7 @@ public class WatermarkGUI extends JFrame {
             String key = keyField.getText();
 
             // Example command, adjust according to your actual command structure
-            String command = "java -jar D:/ShellMarkDevelop/ShellMark/classes/artifacts/ShellMark_jar/ShellMark.jar -E  -i " + inputFile + " -o " + outputFile + " -w " + watermark + " -k " + key;
+            String command = "java -jar -jar D:/ShellMarkDevelop/ShellMark/ShellMark.jar -E -A GTW -i " + inputFile + " -o " + outputFile + " -w " + watermark + " -k " + key;
             Process process = Runtime.getRuntime().exec(command);
             int exitCode = process.waitFor();
             if (exitCode == 0) {
