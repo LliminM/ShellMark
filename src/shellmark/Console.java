@@ -34,7 +34,7 @@ public class Console {
 	   @return url for help page
 	     */
 	    public static java.lang.String getHelpURL(){
-	   return "sandmark/html/sandmark.html";
+	   return "shellmark/html/shellmark.html";
 	    }
 	    
 	  //--------------------------------------------------------------

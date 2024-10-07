@@ -18,6 +18,7 @@ public class MethodCFG extends shellmark.util.newgraph.MutableGraph {
 	      this(method, true);
 	   }
 
+	   //默认的构造函数来生成method的CFG图
 	   public MethodCFG(shellmark.program.Method method,
 	                    boolean exceptionsMatter) {
 	      this.method = method;

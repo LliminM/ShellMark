@@ -43,7 +43,7 @@ public class Graphs {
  }
 
  private static String toDot(Graph g, Style style) {
-    String s = "digraph sandmark {\n";
+    String s = "digraph shellmark {\n";
     s += "   page=\"8.5,11\";\n";
     s += "   margin=0;\n";
     s += "   ratio=auto;\n";

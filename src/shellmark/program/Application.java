@@ -1,5 +1,16 @@
 package shellmark.program;
 
+
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.File;
+import java.io.ByteArrayOutputStream;
+
+
 /**
  * Represents a complete Java program.  An Application object is the
  * root of a tree encompassing Classes and all their subcomponents,
@@ -122,6 +133,35 @@ public class Application extends shellmark.program.Object {
 	    
 	    //load user configuration settings if they exist
 	    loadUserConstraints();
+	}
+
+
+	/**
+	 * Updates the StackMapTable of a .class file using ASM and writes it back to the original file.
+	 *
+	 * @param classFile the .class file to update
+	 * @throws Exception if an error occurs during processing
+	 * @author LiMin
+	 */
+	private void updateStackMapTable(File classFile) throws Exception {
+		try (InputStream inputStream = new FileInputStream(classFile)) {
+			// 使用 ClassReader 读取 .class 文件
+			ClassReader classReader = new ClassReader(inputStream);
+
+			// 使用 ClassWriter 来重新生成字节码，并自动计算栈帧 (StackMapTable)
+			ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+
+			// 通过 ClassReader 接受并传递给 ClassWriter
+			classReader.accept(classWriter, 0);
+
+			// 获取更新后的字节码
+			byte[] updatedClassBytes = classWriter.toByteArray();
+
+			// 将更新后的字节码写入原始 .class 文件
+			try (OutputStream outputStream = new FileOutputStream(classFile)) {
+				outputStream.write(updatedClassBytes);
+			}
+		}
 	}
 	
 	/**
@@ -280,11 +320,41 @@ public class Application extends shellmark.program.Object {
 
 	      // write the jar file, excluding library objects
 	      for (int i = 0; i < members.length; i++) {
-	         shellmark.program.JarElement elem =
-	            (shellmark.program.JarElement) members[i];
+	         shellmark.program.JarElement elem =(shellmark.program.JarElement) members[i];
 	         String fname = elem.getJarName();
 	         jstream.putNextEntry(new java.util.jar.JarEntry(fname));
-	         elem.save(bstream);
+
+			 if(fname.endsWith(".class")) {
+				// Create a temporary file to store the class data
+				File tempClassFile = File.createTempFile("temp", ".class");
+                try (OutputStream tempOut = new FileOutputStream(tempClassFile)) {
+                    elem.save(tempOut);
+                }
+				// Update StackMapTable for .class files
+				//updateStackMapTable(tempClassFile);
+				try {
+                    // Update StackMapTable for .class files
+                    updateStackMapTable(tempClassFile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    // 处理异常，例如记录日志或抛出运行时异常
+                    throw new RuntimeException("Failed to update StackMapTable for " + fname, e);
+                }
+
+				// Write the updated class file back to the jar
+				try (InputStream tempIn = new FileInputStream(tempClassFile)) {
+                    byte[] buffer = new byte[1024];
+                    int bytesRead;
+                    while ((bytesRead = tempIn.read(buffer)) != -1) {
+                        bstream.write(buffer, 0, bytesRead);
+                    }
+                }
+				// Delete the temporary file	
+				tempClassFile.delete();
+			 }else {
+				 elem.save(bstream);
+			 }
+	         //elem.save(bstream);
 	         bstream.flush();
 	      }
 	      jstream.close();

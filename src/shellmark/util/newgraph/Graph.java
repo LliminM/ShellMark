@@ -53,7 +53,7 @@ package shellmark.util.newgraph;
 
 public abstract class Graph {
 	
-	/**
+	    /**
 	    * Returns (approximately) the number of levels of indirection in the
 	    * internal representation of this graph.  The return value of this method
 	    * should be an indication of how much there is to gain in terms of
